@@ -9,9 +9,9 @@ import UIKit
 
 class MainViewController: UIViewController {
 	
-	var redValue = 1
-	var greenValue = 1
-	var blueValue = 1
+	var redValue: Float = 1.00
+	var greenValue: Float = 1.00
+	var blueValue: Float = 1.00
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,15 +25,16 @@ class MainViewController: UIViewController {
 		
     }
     
+	@IBAction func changeColor(_ sender: Any) {
+	}
+	
+//     MARK: - Navigation
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+		let colorVC = segue.destination as! ColorViewController
+		colorVC.redSliderValue = redValue
+		colorVC.greenSliderValue = greenValue
+		colorVC.blueSliderValue = blueValue
     }
-    */
 
 }

@@ -1,11 +1,11 @@
-//  ViewController.swift
+//  ColorViewController.swift
 //  Created by Alexey Efimov on 12.06.2018.
 //  Copyright © 2018 Alexey Efimov. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class ColorViewController: UIViewController {
     
     @IBOutlet weak var colorView: UIView!
     
@@ -20,9 +20,17 @@ class ViewController: UIViewController {
     @IBOutlet weak var redTextField: UITextField!
     @IBOutlet weak var greenTextField: UITextField!
     @IBOutlet weak var blueTextField: UITextField!
+	
+	var redSliderValue: Float!
+	var greenSliderValue: Float!
+	var blueSliderValue: Float!
         
     override func viewDidLoad() {
         super.viewDidLoad()
+		
+		redSlider.value = redSliderValue
+		greenSlider.value = greenSliderValue
+		blueSlider.value = blueSliderValue
         
         colorView.layer.cornerRadius = 15
         
@@ -99,7 +107,7 @@ class ViewController: UIViewController {
 }
 
 // MARK: - UITextFieldDelegate
-extension ViewController: UITextFieldDelegate {
+extension ColorViewController: UITextFieldDelegate {
     
     // Скрываем клавиатуру нажатием на "Done"
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -137,7 +145,7 @@ extension ViewController: UITextFieldDelegate {
     }
 }
 
-extension ViewController {
+extension ColorViewController {
     
     // Метод для отображения кнопки "Готово" на цифровой клавиатуре
     private func addDoneButtonTo(_ textFields: UITextField...) {
