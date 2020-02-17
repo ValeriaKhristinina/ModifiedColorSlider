@@ -5,6 +5,10 @@
 
 import UIKit
 
+protocol  ColorViewControllerDelegate {
+	func transferColorValue(_ redValue: Float, _ greenValue: Float, _ blueValue: Float)
+}
+
 class ColorViewController: UIViewController {
     
     @IBOutlet weak var colorView: UIView!
@@ -24,6 +28,8 @@ class ColorViewController: UIViewController {
 	var redSliderValue: Float!
 	var greenSliderValue: Float!
 	var blueSliderValue: Float!
+	
+	var delegate: ColorViewControllerDelegate!
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +54,6 @@ class ColorViewController: UIViewController {
         
         addDoneButtonTo(redTextField, greenTextField, blueTextField)
     }
-    
     // Изменение цветов слайдерами
     @IBAction func rgbSlider(_ sender: UISlider) {
         
@@ -104,6 +109,12 @@ class ColorViewController: UIViewController {
     private func string(from slider: UISlider) -> String {
         return String(format: "%.2f", slider.value)
     }
+	
+	// Выполнение кнопки "Done"
+	@IBAction func doneButton() {
+		delegate.transferColorValue(redSlider.value, greenSlider.value, blueSlider.value)
+		dismiss(animated: true)
+	}
 }
 
 // MARK: - UITextFieldDelegate
