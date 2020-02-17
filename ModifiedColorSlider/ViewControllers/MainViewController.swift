@@ -7,12 +7,13 @@
 
 import UIKit
 
-
 class MainViewController: UIViewController {
 	
-	var redValue: Float = 1
-	var greenValue: Float = 1
-	var blueValue: Float = 1
+	var viewColor = ViewColor(red: 1, green: 1, blue: 1)
+	
+//	var redValue: Float = 1
+//	var greenValue: Float = 1
+//	var blueValue: Float = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,9 +22,9 @@ class MainViewController: UIViewController {
 	
 	func changeColorView() {
 		view.backgroundColor = UIColor(
-            red: CGFloat(redValue),
-            green: CGFloat(greenValue),
-            blue: CGFloat(blueValue),
+			red: CGFloat(viewColor.red),
+			green: CGFloat(viewColor.green),
+			blue: CGFloat(viewColor.blue),
             alpha: 1
         )
 	}
@@ -33,9 +34,7 @@ class MainViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		let colorVC = segue.destination as! ColorViewController
 		colorVC.delegate = self
-		colorVC.redSliderValue = redValue
-		colorVC.greenSliderValue = greenValue
-		colorVC.blueSliderValue = blueValue
+		colorVC.rbgColor = viewColor
     }
 
 }
@@ -43,13 +42,8 @@ class MainViewController: UIViewController {
 //MARK: - ColorViewControllerDelegate
 
 extension MainViewController: ColorViewControllerDelegate{
-	func transferColorValue( _ redValue: Float, _ greenValue: Float, _ blueValue: Float) {
-		self.redValue = redValue
-		self.blueValue = blueValue
-		self.greenValue = greenValue
-
+	func transferColorValue(_ color: ViewColor) {
+		viewColor = ViewColor(red: color.red, green: color.green, blue: color.blue)
 		changeColorView()
 	}
-	
-	
 }

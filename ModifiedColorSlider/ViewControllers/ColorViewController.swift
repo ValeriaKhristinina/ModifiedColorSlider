@@ -6,7 +6,7 @@
 import UIKit
 
 protocol  ColorViewControllerDelegate {
-	func transferColorValue(_ redValue: Float, _ greenValue: Float, _ blueValue: Float)
+	func transferColorValue(_ color: ViewColor)
 }
 
 class ColorViewController: UIViewController {
@@ -25,18 +25,19 @@ class ColorViewController: UIViewController {
     @IBOutlet weak var greenTextField: UITextField!
     @IBOutlet weak var blueTextField: UITextField!
 	
-	var redSliderValue: Float!
-	var greenSliderValue: Float!
-	var blueSliderValue: Float!
+//	var redSliderValue: Float!
+//	var greenSliderValue: Float!
+//	var blueSliderValue: Float!
+	var rbgColor: ViewColor!
 	
 	var delegate: ColorViewControllerDelegate!
         
     override func viewDidLoad() {
         super.viewDidLoad()
 		
-		redSlider.value = redSliderValue
-		greenSlider.value = greenSliderValue
-		blueSlider.value = blueSliderValue
+		redSlider.value = rbgColor.red
+		greenSlider.value = rbgColor.green
+		blueSlider.value = rbgColor.blue
         
         colorView.layer.cornerRadius = 15
         
@@ -112,8 +113,12 @@ class ColorViewController: UIViewController {
 	
 	// Выполнение кнопки "Done"
 	@IBAction func doneButton() {
-		delegate.transferColorValue(redSlider.value, greenSlider.value, blueSlider.value)
+		var color = ViewColor(red: redSlider.value, green: greenSlider.value, blue: blueSlider.value)
+		delegate.transferColorValue(color)
 		dismiss(animated: true)
+	}
+	deinit {
+		print("ColorViewController had been closed")
 	}
 }
 
