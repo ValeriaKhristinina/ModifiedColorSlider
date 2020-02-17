@@ -113,7 +113,7 @@ class ColorViewController: UIViewController {
 	
 	// Выполнение кнопки "Done"
 	@IBAction func doneButton() {
-		var color = ViewColor(red: redSlider.value, green: greenSlider.value, blue: blueSlider.value)
+		let color = ViewColor(red: redSlider.value, green: greenSlider.value, blue: blueSlider.value)
 		delegate.transferColorValue(color)
 		dismiss(animated: true)
 	}
